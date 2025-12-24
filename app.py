@@ -15,128 +15,149 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Custom CSS for "Mad Scientist Lab" theme
+# Custom CSS for "Retro 8-bit / Cyberpunk" theme
 st.markdown("""
 <style>
-    /* Dark theme with green/purple accents */
+    @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+
+    /* Global styles */
     .stApp {
-        background: linear-gradient(180deg, #0a0a0a 0%, #1a0a2e 50%, #0a1a0a 100%);
+        background-color: #0e1117;
+        font-family: 'DotGothic16', sans-serif !important;
+        color: #00ff41 !important;
     }
-    
+
+    * {
+        font-family: 'DotGothic16', sans-serif !important;
+    }
+
     /* Main title styling */
     .main-title {
         text-align: center;
-        font-size: 3rem;
+        font-size: 3.5rem;
         font-weight: bold;
-        background: linear-gradient(90deg, #00ff88, #8b5cf6, #00ff88);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: gradient 3s ease infinite;
-        text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+        color: #ff007f;
+        text-shadow: 3px 3px 0px #000, 6px 6px 0px #00ff41;
         margin-bottom: 0.5rem;
-    }
-    
-    @keyframes gradient {
-        0% { background-position: 0% center; }
-        50% { background-position: 100% center; }
-        100% { background-position: 0% center; }
+        text-transform: uppercase;
     }
     
     .subtitle {
         text-align: center;
-        color: #888;
-        font-size: 1.1rem;
+        color: #00ff41;
+        font-size: 1.2rem;
         margin-bottom: 2rem;
+        background: rgba(0, 255, 65, 0.1);
+        padding: 10px;
+        border: 1px dashed #00ff41;
     }
     
     /* Input field styling */
     .stTextInput > div > div > input {
-        background-color: #1a1a2e !important;
-        border: 2px solid #8b5cf6 !important;
-        color: #00ff88 !important;
+        background-color: #000 !important;
+        border: 2px solid #00ff41 !important;
+        color: #00ff41 !important;
         font-size: 1.2rem !important;
         padding: 0.75rem !important;
-        border-radius: 10px !important;
+        border-radius: 0px !important;
     }
     
     .stTextInput > div > div > input:focus {
-        border-color: #00ff88 !important;
-        box-shadow: 0 0 20px rgba(0, 255, 136, 0.3) !important;
+        border-color: #ff007f !important;
+        box-shadow: 0 0 10px #ff007f !important;
+    }
+
+    .stTextInput label {
+        color: #00ff41 !important;
     }
     
     /* Button styling */
     .stButton > button {
-        background: linear-gradient(90deg, #8b5cf6, #00ff88) !important;
-        color: #000 !important;
+        background-color: #000 !important;
+        color: #00ff41 !important;
         font-weight: bold !important;
         font-size: 1.2rem !important;
         padding: 0.75rem 2rem !important;
-        border: none !important;
-        border-radius: 25px !important;
+        border: 4px solid #00ff41 !important;
+        border-radius: 0px !important;
         width: 100% !important;
-        transition: all 0.3s ease !important;
+        transition: none !important;
+        text-transform: uppercase;
+        box-shadow: 4px 4px 0px #00ff41;
     }
     
     .stButton > button:hover {
-        transform: scale(1.05) !important;
-        box-shadow: 0 0 30px rgba(139, 92, 246, 0.5) !important;
+        background-color: #00ff41 !important;
+        color: #000 !important;
+        box-shadow: none !important;
+    }
+
+    .stButton > button:active {
+        transform: translateY(2px) translateX(2px) !important;
+        box-shadow: 2px 2px 0px #00ff41 !important;
     }
     
     /* Result box */
     .result-box {
-        background: linear-gradient(135deg, #1a0a2e, #0a2a1a);
-        border: 2px solid #00ff88;
-        border-radius: 15px;
+        background-color: #000;
+        border: 4px double #00ff41;
         padding: 2rem;
         text-align: center;
         margin: 2rem 0;
-        box-shadow: 0 0 40px rgba(0, 255, 136, 0.2);
+        position: relative;
     }
     
     .result-word {
-        font-size: 3rem;
+        font-size: 3.5rem;
         font-weight: bold;
-        color: #00ff88;
-        text-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
-        animation: pulse 2s ease-in-out infinite;
-    }
-    
-    @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.7; }
+        color: #ff007f;
+        text-shadow: 2px 2px 0px #fff;
     }
     
     .formula {
         font-size: 1.5rem;
-        color: #8b5cf6;
+        color: #00ff41;
         margin-bottom: 1rem;
-        font-family: monospace;
     }
     
     /* Warning styling */
     .warning-box {
-        background: linear-gradient(135deg, #2e1a0a, #2e0a0a);
-        border: 2px solid #ff4444;
-        border-radius: 15px;
+        background-color: #200;
+        border: 2px solid #ff0000;
         padding: 1.5rem;
         text-align: center;
         margin: 2rem 0;
     }
     
     .warning-text {
-        color: #ff4444;
+        color: #ff0000;
         font-size: 1.3rem;
         font-weight: bold;
     }
     
-    /* Lab equipment decorations */
+    /* CRT Scanline Effect */
+    body::before {
+        content: " ";
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+        z-index: 9999;
+        background-size: 100% 4px, 3px 100%;
+        pointer-events: none;
+    }
+
+    /* Lab equipment decorations (unused but kept for structure) */
     .lab-header {
         display: flex;
         justify-content: center;
         gap: 1rem;
         font-size: 2rem;
         margin-bottom: 1rem;
+        color: #00ff41;
     }
     
     /* Hide Streamlit branding */
@@ -208,9 +229,9 @@ def find_chimera(model, word_a: str, word_b: str) -> tuple[str | None, list]:
 
 def main():
     # Header
-    st.markdown('<div class="lab-header">🧪 ⚗️ 🔬</div>', unsafe_allow_html=True)
-    st.markdown('<h1 class="main-title">CONCEPT CHIMERA</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="subtitle">~ 概念融合研究所 ~<br>Mix word DNA to create new concepts</p>', unsafe_allow_html=True)
+    st.markdown('<div class="lab-header">SYSTEM READY > _</div>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-title">CONCEPTS</h1>', unsafe_allow_html=True)
+    st.markdown('<p class="subtitle">RETRO-SYNTHESIS INTERFACE v1.0.4<br>[ 概念融合プロトコル実行中 ]</p>', unsafe_allow_html=True)
     
     # Load model
     model = load_model()
